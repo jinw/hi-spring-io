@@ -1,0 +1,31 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.1.6.RELEASE'
+    }
+}
+
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+
+war {
+    baseName = 'hi'
+    version = '1.0'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'http://repo.spring.io/libs-release' }
+}
+
+configurations {
+    providedRuntime
+}
+
+dependencies {
+    versionManagement 'io.spring.platform:platform-versions:1.0.2.RELEASE@properties'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+}
