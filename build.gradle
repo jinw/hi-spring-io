@@ -1,31 +1,24 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE'
+        classpath 'io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE'
     }
 }
 
-apply plugin: 'spring-boot'
-apply plugin: 'war'
-
-war {
-    baseName = 'hi'
-    version = '1.0'
-}
+apply plugin: 'io.spring.dependency-management'
 
 repositories {
     mavenCentral()
-    maven { url 'http://repo.spring.io/libs-release' }
 }
 
-configurations {
-    providedRuntime
+dependencyManagement {
+    imports {
+        mavenBom 'io.spring.platform:platform-bom:2.0.0.RELEASE'
+    }
 }
 
 dependencies {
-    versionManagement 'io.spring.platform:platform-versions:1.1.3.RELEASE@properties'
-    compile 'org.springframework.boot:spring-boot-starter-web'
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    compile 'org.springframework:spring-core'
 }
